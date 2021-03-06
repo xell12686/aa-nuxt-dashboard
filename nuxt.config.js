@@ -58,6 +58,7 @@ export default {
         dark: {
           primary: '#706ce7',
           info: '#706ce7',
+          // secondary: '#1b2135',
         },
         light: {
           primary: '#706ce7',

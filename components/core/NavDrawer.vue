@@ -1,5 +1,10 @@
 <template>
-  <v-navigation-drawer v-model="toggleValue" fixed app overlay-color="primary">
+  <v-navigation-drawer
+    v-model="toggleValue"
+    :src="theme.isDark ? darkBg : lightBg"
+    fixed
+    app
+  >
     <v-container class="branding-wrap pa-5">
       <v-row>
         <v-col cols="4">
@@ -11,7 +16,7 @@
           <v-switch
             color="primary"
             class="ma-0 theme-toggle"
-            label="Light Mode"
+            label="Light Theme"
             @change="$vuetify.theme.dark = !$vuetify.theme.dark"
           ></v-switch>
         </v-col>
@@ -28,58 +33,93 @@
           <h4 class="font-weight-light">Watson Joyce</h4>
         </v-chip>
 
-        <p class="font-weight-light">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce
-          accumsan erat eu tellus viverra viverra a nec massa.
-        </p>
-
-        <v-btn color="success">Follow</v-btn>
+        <div class="contact-links mt-2">
+          <v-icon>mdi-cog</v-icon>
+          <v-icon>mdi-mail</v-icon>
+          <v-icon>mdi-comment-plus-outline</v-icon>
+        </div>
       </v-card-text>
     </v-card>
 
+    <v-divider></v-divider>
+
+    <v-list-item to="/analytics">
+      <v-list-item-icon>
+        <v-icon>mdi-chart-line-stacked</v-icon>
+      </v-list-item-icon>
+      <v-list-item-title>Analytics</v-list-item-title>
+    </v-list-item>
+    <v-list-item to="/">
+      <v-list-item-icon>
+        <v-icon>mdi-view-dashboard</v-icon>
+      </v-list-item-icon>
+      <v-list-item-title>Dashboard</v-list-item-title>
+    </v-list-item>
+    <v-list-item to="/inspire">
+      <v-list-item-icon>
+        <v-icon>mdi-chart-bubble</v-icon>
+      </v-list-item-icon>
+      <v-list-item-title>Inspire</v-list-item-title>
+    </v-list-item>
+
     <v-list>
-      <v-list-item
-        v-for="(item, i) in items"
-        :key="i"
-        :to="item.to"
-        router
-        exact
+      <v-list-group
+        v-for="item in items"
+        :key="item.title"
+        v-model="item.active"
+        :prepend-icon="item.action"
+        no-action
       >
-        <v-list-item-action>
-          <v-icon>{{ item.icon }}</v-icon>
-        </v-list-item-action>
-        <v-list-item-content>
-          <v-list-item-title v-text="item.title" />
-        </v-list-item-content>
-      </v-list-item>
+        <template #activator>
+          <v-list-item-content>
+            <v-list-item-title v-text="item.title"></v-list-item-title>
+          </v-list-item-content>
+        </template>
+
+        <v-list-item v-for="child in item.items" :key="child.title">
+          <v-list-item-content>
+            <v-list-item-title v-text="child.title"></v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
+      </v-list-group>
     </v-list>
   </v-navigation-drawer>
 </template>
 
 <script>
 import { mapMutations, mapState } from 'vuex'
-import VuetifyLogo from '../VuetifyLogo.vue'
+import VuetifyLogo from '../branding/VuetifyLogo.vue'
 
 export default {
   components: {
     VuetifyLogo,
   },
+  inject: ['theme'],
   data: () => ({
     items: [
       {
-        icon: 'mdi-apps',
-        title: 'Dashboard',
-        to: '/',
+        action: 'mdi-school',
+        items: [{ title: 'List Item' }],
+        title: 'Education',
       },
       {
-        icon: 'mdi-chart-bubble',
-        title: 'Inspire',
-        to: '/inspire',
+        action: 'mdi-run',
+        items: [
+          { title: 'Breakfast & brunch' },
+          { title: 'New American' },
+          { title: 'Sushi' },
+        ],
+        title: 'Family',
       },
       {
-        icon: 'mdi-chart-bubble',
-        title: 'Admin',
-        to: '/admin',
+        action: 'mdi-bottle-tonic-plus',
+        items: [{ title: 'List Item' }],
+        title: 'Health',
+      },
+      {
+        action: 'mdi-content-cut',
+        items: [{ title: 'List Item' }],
+        title: 'Office',
       },
     ],
     lightBg: 'img/light-bg.jpg',
@@ -102,25 +142,47 @@ export default {
 }
 </script>
 
-<style scoped>
-.branding-wrap {
-  max-height: 80px;
-  overflow: hidden;
+<style lang="scss" scoped>
+.v-navigation-drawer {
+  &.theme--dark {
+    background-color: $darkPrimary;
+  }
+  .branding-wrap {
+    max-height: 80px;
+    overflow: hidden;
+  }
+  .logo-wrap {
+    transform: scale(0.2);
+    transform-origin: top;
+    left: -20px;
+    position: relative;
+  }
+  .v-card {
+    background-color: transparent;
+    border: none;
+  }
 }
-.logo-wrap {
-  transform: scale(0.2);
-  transform-origin: top;
-  left: -20px;
-  position: relative;
+.contact-links {
+  .v-icon {
+    margin: 0 3px;
+  }
 }
-.v-input {
-  float: right;
+.v-divider {
+  border-bottom: 2px solid black;
 }
-.v-input label {
-  font-size: 11px;
-}
-.v-card {
-  background-color: transparent;
-  border: none;
+::v-deep {
+  .v-image {
+    opacity: 0.1;
+    &.theme--dark {
+      opacity: 0.5;
+    }
+  }
+  .v-input {
+    float: right;
+    * {
+      font-size: 11px;
+      text-transform: uppercase;
+    }
+  }
 }
 </style>
