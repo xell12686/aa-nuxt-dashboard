@@ -2,14 +2,18 @@
   <v-app-bar fixed app>
     <v-app-bar-nav-icon @click.stop="onClick" />
     <v-spacer />
-    <v-alert type="info"> I'm an info alert. </v-alert>
+    <TopToolBar />
   </v-app-bar>
 </template>
 
 <script>
 import { mapMutations } from 'vuex'
+import TopToolBar from '../toolbars/TopToolBar'
 
 export default {
+  components: {
+    TopToolBar,
+  },
   methods: {
     ...mapMutations(['setDrawer']),
     onClick() {

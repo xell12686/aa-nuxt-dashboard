@@ -25,7 +25,7 @@
 
     <v-card class="AvatarCard text-center py-4" outlined>
       <v-avatar class="mx-auto d-block rounded-circle" size="100">
-        <img src="https://randomuser.me/api/portraits/men/1.jpg" />
+        <v-img src="https://randomuser.me/api/portraits/men/1.jpg" />
       </v-avatar>
       <v-card-text class="text-center">
         <v-chip class="ma-2" color="transparent" label>
@@ -171,7 +171,7 @@ export default {
   border-bottom: 2px solid black;
 }
 ::v-deep {
-  .v-image {
+  .v-navigation-drawer__image .v-image {
     opacity: 0.1;
     &.theme--dark {
       opacity: 0.5;
