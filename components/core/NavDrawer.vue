@@ -43,13 +43,13 @@
 
     <v-divider></v-divider>
 
-    <v-list-item to="/analytics">
+    <v-list-item to="/">
       <v-list-item-icon>
         <v-icon>mdi-chart-line-stacked</v-icon>
       </v-list-item-icon>
       <v-list-item-title>Analytics</v-list-item-title>
     </v-list-item>
-    <v-list-item to="/">
+    <v-list-item to="/dashboard">
       <v-list-item-icon>
         <v-icon>mdi-view-dashboard</v-icon>
       </v-list-item-icon>
