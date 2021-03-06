@@ -1,5 +1,23 @@
 <template>
   <v-navigation-drawer v-model="toggleValue" fixed app overlay-color="primary">
+    <v-container class="branding-wrap pa-5">
+      <v-row>
+        <v-col cols="4">
+          <div class="logo-wrap">
+            <VuetifyLogo />
+          </div>
+        </v-col>
+        <v-col cols="8">
+          <v-switch
+            color="primary"
+            class="ma-0 theme-toggle"
+            label="Light Mode"
+            @change="$vuetify.theme.dark = !$vuetify.theme.dark"
+          ></v-switch>
+        </v-col>
+      </v-row>
+    </v-container>
+
     <v-card class="AvatarCard text-center py-4" outlined>
       <v-avatar class="mx-auto d-block rounded-circle" size="100">
         <img src="https://randomuser.me/api/portraits/men/1.jpg" />
@@ -40,8 +58,12 @@
 
 <script>
 import { mapMutations, mapState } from 'vuex'
+import VuetifyLogo from '../VuetifyLogo.vue'
 
 export default {
+  components: {
+    VuetifyLogo,
+  },
   data: () => ({
     items: [
       {
@@ -81,7 +103,23 @@ export default {
 </script>
 
 <style scoped>
-.AvatarCard {
+.branding-wrap {
+  max-height: 80px;
+  overflow: hidden;
+}
+.logo-wrap {
+  transform: scale(0.2);
+  transform-origin: top;
+  left: -20px;
+  position: relative;
+}
+.v-input {
+  float: right;
+}
+.v-input label {
+  font-size: 11px;
+}
+.v-card {
   background-color: transparent;
   border: none;
 }

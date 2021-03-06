@@ -1,3 +1,4 @@
+// eslint-disable-next-line no-unused-vars
 import colors from 'vuetify/es5/util/colors'
 
 export default {
@@ -56,12 +57,11 @@ export default {
       themes: {
         dark: {
           primary: '#706ce7',
-          accent: colors.purple.darken3,
-          secondary: colors.amber.darken3,
-          info: colors.teal.lighten1,
-          warning: colors.amber.base,
-          error: colors.deepOrange.accent4,
-          success: colors.green.accent3,
+          info: '#706ce7',
+        },
+        light: {
+          primary: '#706ce7',
+          info: '#706ce7',
         },
       },
     },

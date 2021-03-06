@@ -16,8 +16,8 @@
 </template>
 
 <script>
-import NavDrawer from '../components/core/NavDrawer'
-import AppBar from '../components/core/AppBar'
+import NavDrawer from '~/components/core/NavDrawer'
+import AppBar from '~/components/core/AppBar'
 
 export default {
   components: {
